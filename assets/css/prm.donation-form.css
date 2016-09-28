@@ -1,0 +1,43 @@
+.prm-donation-form-element {
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+
+	margin: 10px 0;
+	padding: 0 5px;
+}
+.prm-donation-form-element label {
+	display: block;
+}
+.prm-donation-form-email,
+.prm-donation-form-phone {
+	float: left;
+	width: 50%;
+}
+.prm-donation-form-address,
+.prm-donation-form-payment-method {
+	clear: left;
+}
+.prm-donation-form-address .prm-donation-form-element {
+	float: left;
+}
+.prm-donation-form-address-zip-code {
+	width: 20%;
+}
+.prm-donation-form-address-administrative-area {
+	width: 20%;
+}
+.prm-donation-form-address-locality {
+	width: 30%;
+}
+.prm-donation-form-address-dependent-locality {
+	width: 30%;
+}
+.prm-donation-form-address-thoroughfare {
+	width: 55%;
+}
+.prm-donation-form-address-thoroughfare-number {
+	width: 15%;
+}
+.prm-donation-form-address-premise {
+	width: 30%;
+}

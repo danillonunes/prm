@@ -28,3 +28,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+
+// Define plugin filename.
+define('PRM_PLUGIN_FILE', __FILE__);
+
+// Define directory where the plugin is installed.
+define('PRM_PLUGIN_DIR', realpath(dirname(PRM_PLUGIN_FILE)));
+
+// Include stylesheets and scripts.
+require_once(PRM_PLUGIN_DIR . '/includes/prm.assets.php');
+
+// Include shortcodes file.
+require_once(PRM_PLUGIN_DIR . '/includes/prm.shortcodes.php');
