@@ -35,6 +35,9 @@ define('PRM_PLUGIN_FILE', __FILE__);
 // Define directory where the plugin is installed.
 define('PRM_PLUGIN_DIR', realpath(dirname(PRM_PLUGIN_FILE)));
 
+// Define URL where the plugin is installed.
+define('PRM_PLUGIN_DIR_URL', plugin_dir_url(PRM_PLUGIN_FILE));
+
 // Include stylesheets and scripts.
 require_once(PRM_PLUGIN_DIR . '/includes/prm.assets.php');
 

@@ -23,7 +23,7 @@ $(function(){
 	$zip
 		.mask('00000-000')
 		.on('change', function() {
-			$.getJSON('//viacep.com.br/ws/' + $zip.val().replace(/-/, '') + '/json/', function(data) {
+			$.getJSON('http://viacep.com.br/ws/' + $zip.val().replace(/-/, '') + '/json/', function(data) {
 				$administrativeArea.val(data.uf);
 				$locality.val(data.localidade);
 				$dependentLocality.val(data.bairro);
