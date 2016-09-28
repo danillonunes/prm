@@ -11,24 +11,24 @@ var phoneMaskOptions = {
 
 $(function(){
 	var $phone = $('#prm-donation-form-phone');
-	var $zip = $('#prm-donation-form-address-zip-code');
+	var $postal = $('#prm-donation-form-address-postal-code');
 	var $administrativeArea = $('#prm-donation-form-address-administrative-area');
 	var $locality = $('#prm-donation-form-address-locality');
 	var $dependentLocality = $('#prm-donation-form-address-dependent-locality');
 	var $thoroughfare = $('#prm-donation-form-address-thoroughfare');
-	var $number = $('#prm-donation-form-address-thoroughfare-number');
+	var $premise = $('#prm-donation-form-address-premise');
 
 	$phone.mask(phoneMaskCallback, phoneMaskOptions);
 
-	$zip
+	$postal
 		.mask('00000-000')
 		.on('change', function() {
-			$.getJSON('http://viacep.com.br/ws/' + $zip.val().replace(/-/, '') + '/json/', function(data) {
+			$.getJSON('http://viacep.com.br/ws/' + $postal.val().replace(/-/, '') + '/json/', function(data) {
 				$administrativeArea.val(data.uf);
 				$locality.val(data.localidade);
 				$dependentLocality.val(data.bairro);
 				$thoroughfare.val(data.logradouro);
-				$number.trigger('focus');
+				$premise.trigger('focus');
 			});
 		});
 });

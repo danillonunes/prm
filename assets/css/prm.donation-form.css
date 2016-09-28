@@ -1,17 +1,24 @@
 .prm-donation-form-element {
-	-moz-box-sizing: border-box;
-	     box-sizing: border-box;
-
+	box-sizing: border-box;
 	margin: 10px 0;
 	padding: 0 5px;
+	-moz-box-sizing: border-box;
 }
 .prm-donation-form-element label {
 	display: block;
 }
+.prm-donation-form-name {
+	width: 65%;
+}
 .prm-donation-form-email,
 .prm-donation-form-phone {
 	float: left;
-	width: 50%;
+}
+.prm-donation-form-email {
+	width: 35%;
+}
+.prm-donation-form-phone {
+	width: 30%;
 }
 .prm-donation-form-address,
 .prm-donation-form-payment-method {
@@ -20,10 +27,7 @@
 .prm-donation-form-address .prm-donation-form-element {
 	float: left;
 }
-.prm-donation-form-address-zip-code {
-	width: 20%;
-}
-.prm-donation-form-address-administrative-area {
+.prm-donation-form-address-postal-code {
 	width: 20%;
 }
 .prm-donation-form-address-locality {
@@ -33,11 +37,18 @@
 	width: 30%;
 }
 .prm-donation-form-address-thoroughfare {
+	clear: left;
 	width: 55%;
 }
-.prm-donation-form-address-thoroughfare-number {
+.prm-donation-form-address-premise {
 	width: 15%;
 }
-.prm-donation-form-address-premise {
+.prm-donation-form-address-sub-premise {
 	width: 30%;
+}
+.prm-donation-form-address-administrative-area {
+	width: 40%;
+}
+.prm-donation-form-address-administrative-area select {
+	display: block;
 }

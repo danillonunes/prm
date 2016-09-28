@@ -17,10 +17,45 @@
 		</div>
 
 		<div class="prm-donation-form-address">
-			<div class="prm-donation-form-element prm-donation-form-address-zip-code">
+			<div class="prm-donation-form-element prm-donation-form-address-postal-code">
 				<label>
 					<?php _e('CEP', 'prm'); ?>:
-					<input type="text" name="prm-donation-form-address-zip-code" id="prm-donation-form-address-zip-code">
+					<input type="text" name="prm-donation-form-address-postal-code" id="prm-donation-form-address-postal-code">
+				</label>
+			</div>
+
+			<div class="prm-donation-form-element prm-donation-form-address-thoroughfare">
+				<label>
+					<?php _e('Logradouro', 'prm'); ?>:
+					<input type="text" name="prm-donation-form-address-thoroughfare" id="prm-donation-form-address-thoroughfare">
+				</label>
+			</div>
+
+			<div class="prm-donation-form-element prm-donation-form-address-premise">
+				<label>
+					<?php _e('Número', 'prm'); ?>:
+					<input type="text" name="prm-donation-form-address-premise" id="prm-donation-form-address-premise">
+				</label>
+			</div>
+
+			<div class="prm-donation-form-element prm-donation-form-address-sub-premise">
+				<label>
+					<?php _e('Complemento (opcional)', 'prm'); ?>:
+					<input type="text" name="prm-donation-form-address-sub-premise" id="prm-donation-form-address-sub-premise">
+				</label>
+			</div>
+
+			<div class="prm-donation-form-element prm-donation-form-address-dependent-locality">
+				<label>
+					<?php _e('Bairro', 'prm'); ?>:
+					<input type="text" name="prm-donation-form-address-dependent-locality" id="prm-donation-form-address-dependent-locality">
+				</label>
+			</div>
+
+			<div class="prm-donation-form-element prm-donation-form-address-locality">
+				<label>
+					<?php _e('Cidade', 'prm'); ?>:
+					<input type="text" name="prm-donation-form-address-locality" id="prm-donation-form-address-locality">
 				</label>
 			</div>
 
@@ -57,41 +92,6 @@
 						<option value="SE"><?php _e('Sergipe', 'prm'); ?></option>
 						<option value="TO"><?php _e('Tocantins', 'prm'); ?></option>
 					</select>
-				</label>
-			</div>
-
-			<div class="prm-donation-form-element prm-donation-form-address-locality">
-				<label>
-					<?php _e('Cidade', 'prm'); ?>:
-					<input type="text" name="prm-donation-form-address-locality" id="prm-donation-form-address-locality">
-				</label>
-			</div>
-
-			<div class="prm-donation-form-element prm-donation-form-address-dependent-locality">
-				<label>
-					<?php _e('Bairro', 'prm'); ?>:
-					<input type="text" name="prm-donation-form-address-dependent-locality" id="prm-donation-form-address-dependent-locality">
-				</label>
-			</div>
-
-			<div class="prm-donation-form-element prm-donation-form-address-thoroughfare">
-				<label>
-					<?php _e('Logradouro', 'prm'); ?>:
-					<input type="text" name="prm-donation-form-address-thoroughfare" id="prm-donation-form-address-thoroughfare">
-				</label>
-			</div>
-
-			<div class="prm-donation-form-element prm-donation-form-address-thoroughfare-number">
-				<label>
-					<?php _e('Número', 'prm'); ?>:
-					<input type="text" name="prm-donation-form-address-thoroughfare-number" id="prm-donation-form-address-thoroughfare-number">
-				</label>
-			</div>
-
-			<div class="prm-donation-form-element prm-donation-form-address-premise">
-				<label>
-					<?php _e('Complemento (opcional)', 'prm'); ?>:
-					<input type="text" name="prm-donation-form-address-premise" id="prm-donation-form-address-premise">
 				</label>
 			</div>
 		</div>
