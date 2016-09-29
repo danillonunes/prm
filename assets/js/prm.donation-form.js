@@ -12,6 +12,8 @@ var phoneMaskOptions = {
 $(function(){
 	var $phone = $('#prm-donation-form-phone');
 	var $postal = $('#prm-donation-form-address-postal-code');
+	var $postalEl = $postal.parents('.prm-donation-form-element');
+	var $postalMsg = $postal.after('<span class="msg"></span>').next('.msg');
 	var $administrativeArea = $('#prm-donation-form-address-administrative-area');
 	var $locality = $('#prm-donation-form-address-locality');
 	var $dependentLocality = $('#prm-donation-form-address-dependent-locality');
@@ -22,13 +24,44 @@ $(function(){
 
 	$postal
 		.mask('00000-000')
+		.on('loading-start', function() {
+			$postalEl.addClass('loading');
+			$postalMsg.text('Carregando endereço...');
+		})
+		.on('loading-error', function() {
+			$postal.trigger('loading-clean');
+			$postalEl.addClass('error');
+			$postalMsg.text('Não foi encontrado um endereço para o CEP informado.');
+		})
+		.on('loading-clean', function() {
+			$postalEl
+				.removeClass('error')
+				.removeClass('loading');
+			$postalMsg.text('');
+		})
 		.on('change', function() {
-			$.getJSON('http://viacep.com.br/ws/' + $postal.val().replace(/-/, '') + '/json/', function(data) {
-				$administrativeArea.val(data.uf);
-				$locality.val(data.localidade);
-				$dependentLocality.val(data.bairro);
-				$thoroughfare.val(data.logradouro);
-				$premise.trigger('focus');
+			$postal
+				.trigger('loading-clean')
+				.trigger('loading-start');
+			$.ajax({
+				'dataType': 'json',
+				'url': 'http://viacep.com.br/ws/' + $postal.val().replace(/-/, '') + '/json/',
+				'success': function(data) {
+					if (data.erro) {
+						$postal.trigger('loading-error');
+					}
+					else {
+						$administrativeArea.val(data.uf);
+						$locality.val(data.localidade);
+						$dependentLocality.val(data.bairro);
+						$thoroughfare.val(data.logradouro);
+						$premise.trigger('focus');
+						$postal.trigger('loading-clean');
+					}
+				},
+				'error': function() {
+					$postal.trigger('loading-error');
+				},
 			});
 		});
 });

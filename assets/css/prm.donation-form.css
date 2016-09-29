@@ -28,7 +28,22 @@
 	float: left;
 }
 .prm-donation-form-address-postal-code {
+	width: 100%;
+}
+#prm-donation-form-address-postal-code {
+	float: left;
 	width: 20%;
+}
+.prm-donation-form-address-postal-code .msg {
+	float: left;
+	margin: 6px 10px;
+}
+.prm-donation-form-address-postal-code.loading .msg {
+	background: url('../img/load.gif');
+	display: block;
+	height: 16px;
+	text-indent: -99999px;
+	width: 16px;
 }
 .prm-donation-form-address-locality {
 	width: 30%;
