@@ -41,5 +41,11 @@ define('PRM_PLUGIN_DIR_URL', plugin_dir_url(PRM_PLUGIN_FILE));
 // Include stylesheets and scripts.
 require_once(PRM_PLUGIN_DIR . '/includes/prm.assets.php');
 
+// Include donation form file.
+require_once(PRM_PLUGIN_DIR . '/includes/prm.donation-form.php');
+
+// Include options file.
+require_once(PRM_PLUGIN_DIR . '/includes/prm.options.php');
+
 // Include shortcodes file.
 require_once(PRM_PLUGIN_DIR . '/includes/prm.shortcodes.php');

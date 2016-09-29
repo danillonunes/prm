@@ -6,13 +6,19 @@
 </p>
 
 <p>
-	<?php _e('Nome', 'prm'); ?>: <?php echo $name; ?>
+	<strong><?php _e('Nome', 'prm'); ?>:</strong>
 	<br>
-	<?php _e('Email', 'prm'); ?>: <?php echo $email; ?>
+	<?php echo $name; ?>
 	<br>
-	<?php _e('Telefone', 'prm'); ?>: <?php echo $phone; ?>
+	<strong><?php _e('Email', 'prm'); ?>:</strong>
 	<br>
-	<?php _e('Endereço', 'prm'); ?>:
+	<?php echo $email; ?>
+	<br>
+	<strong><?php _e('Telefone', 'prm'); ?>:</strong>
+	<br>
+	<?php echo $phone; ?>
+	<br>
+	<strong><?php _e('Endereço', 'prm'); ?>:</strong>
 	<br>
 	<?php echo $thoroughfare; ?>, <?php echo $premise; ?><?php if ($sub_premise): echo ', ' . $sub_premise; endif; ?>
 	<br>
@@ -22,6 +28,5 @@
 </p>
 
 <p>
-	<?php _e('Forma de pagamento:', 'prm'); ?>: <?php echo $paymnt_method; ?>
-	<?php if ($paymnt_details): echo $paymnt_method; endif; ?>
+	<?php _e('Forma de pagamento', 'prm'); ?>: <?php echo $payment_method; ?>
 </p>
