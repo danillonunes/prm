@@ -10,7 +10,8 @@ function prm_donation_form() {
 	}
 	else {
 		include_once(PRM_PLUGIN_DIR . '/includes/prm.donation-form.submit.php');
-		$html = prm_donation_form_submit($_POST);
+		$values = prm_donation_form_values($_POST);
+		$html = prm_donation_form_submit($values);
 	}
 
 	return $html;
