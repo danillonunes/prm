@@ -38,13 +38,13 @@ function prm_donation_form_submit_payment_paypal($values) {
 	$params['cmd'] = '_xclick-subscriptions';
 	$params['business'] = get_option('prm_paypal_email');
 	$params['lc'] = 'BR';
-	$params['item_name'] = get_option('prm_subscription_paypal_item_name');
-	$params['item_number'] = get_option('prm_subscription_paypal_item_number');
+	$params['item_name'] = get_option('prm_subscription_item_name');
+	$params['item_number'] = '';
 	$params['src'] = '1';
-	$params['a3'] = get_option('prm_subscription_paypal_amount');
+	$params['a3'] = get_option('prm_subscription_amount');
 	$params['p3'] = '1';
 	$params['t3'] = 'M';
-	$params['currency_code'] = get_option('prm_subscription_paypal_currency');
+	$params['currency_code'] = 'BRL';
 	$params['bn'] = 'PP-SubscriptionsBF:btn_subscribeCC_LG.gif:NonHosted';
 	$params['charset'] = 'UTF-8';
 
@@ -63,6 +63,62 @@ function prm_donation_form_submit_payment_paypal($values) {
 }
 
 function prm_donation_form_submit_payment_pagseguro($values) {
+	$pagseguro_pre_url = 'https://ws.pagseguro.uol.com.br/v2/pre-approvals/request';
+
+	$phone_number = preg_replace('/[^\d]/', '', $values['phone']);
+	$postal_number = preg_replace('/[^\d]/', '', $values['address']['postal-code']);
+
+	$pre_params['email'] = get_option('prm_pagseguro_email');
+	$pre_params['token'] = get_option('prm_pagseguro_token');
+
+	$pre_params['senderName'] = $values['name'];
+	$pre_params['senderAreaCode'] = substr($phone_number, 0, 2);
+	$pre_params['senderPhone'] = substr($phone_number, 2);
+	$pre_params['senderEmail'] = $values['email'];
+	$pre_params['senderAddressStreet'] = $values['address']['thoroughfare'];
+	$pre_params['senderAddressNumber'] = $values['address']['premise'];
+	$pre_params['senderAddressComplement'] = $values['address']['sub-premise'];
+	$pre_params['senderAddressDistrict'] = $values['address']['dependent-locality'];
+	$pre_params['senderAddressPostalCode'] = $postal_number;
+	$pre_params['senderAddressCity'] = $values['address']['locality'];
+	$pre_params['senderAddressState'] = $values['address']['administrative-area'];
+	$pre_params['senderAddressCountry'] = 'BRA';
+
+	$pre_params['preApprovalCharge'] = 'auto';
+	$pre_params['preApprovalName'] = get_option('prm_subscription_item_name');
+	$pre_params['preApprovalName'] = $pre_params['preApprovalName'] ? $pre_params['preApprovalName'] : get_bloginfo('name');
+	$pre_params['preApprovalAmountPerPayment'] = get_option('prm_subscription_amount');
+	$pre_params['preApprovalPeriod'] = 'monthly';
+	$pre_params['preApprovalFinalDate'] = date('Y-m-d\TH:i:s.uP', strtotime("+2 years"));
+	$pre_params['preApprovalMaxTotalAmount'] = sprintf('%01.2f', get_option('prm_subscription_amount') * 24);
+
+	$pre_params['receiverEmail'] = get_option('prm_pagseguro_email');
+
+	$return_url = get_option('prm_subscription_return_url');
+	$return_url = strpos('?', $return_url) === FALSE ? $return_url . '?' : $return_url . '&';
+	$return_url = $return_url . 'prm-donation-payment-method=pagseguro';
+
+	$pre_params['redirectURL'] = $return_url;
+
+	$args = array(
+		'method' => 'POST',
+		'headers' => array(
+			'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+		),
+		'body' => utf8_encode(http_build_query($pre_params)),
+	);
+
+	$pre_approval = wp_remote_request($pagseguro_pre_url, $args);
+	$pre_approval_obj = new SimpleXMLElement($pre_approval['body']);
+
+	if (isset($pre_approval_obj->code)) {
+		$url = 'https://pagseguro.uol.com.br/v2/pre-approvals/request.html?code=' . $pre_approval_obj->code;
+
+		return array(
+			'status' => 'processing',
+			'redirect' => $url
+		);
+	}
 }
 
 function prm_donation_form_submit_payment_redirect($values) {

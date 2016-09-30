@@ -5,11 +5,11 @@ add_action('admin_menu', 'prm_admin_menu');
 
 function prm_options_admin_init() {
 	register_setting('prm', 'prm_email');
+	register_setting('prm', 'prm_subscription_amount');
+	register_setting('prm', 'prm_subscription_item_name');
 	register_setting('prm', 'prm_paypal_email');
-	register_setting('prm', 'prm_subscription_paypal_item_name');
-	register_setting('prm', 'prm_subscription_paypal_item_number');
-	register_setting('prm', 'prm_subscription_paypal_amount');
-	register_setting('prm', 'prm_subscription_paypal_currency');
+	register_setting('prm', 'prm_pagseguro_email');
+	register_setting('prm', 'prm_pagseguro_token');
 	register_setting('prm', 'prm_subscription_return_url');
 	register_setting('prm', 'prm_subscription_paypal_message');
 	register_setting('prm', 'prm_subscription_pagseguro_message');

@@ -1,11 +1,17 @@
-<?php defined( 'ABSPATH' ) or die( 'No direct access allowed.' ); ?>
+<?php defined('ABSPATH') or exit; ?>
 <div class="wrap">
-<h2><?php _e( 'PRM: The Patrão Relationship Management!', 'prm' ); ?></h2>
+<h2><?php _e('PRM: The Patrão Relationship Management!', 'prm'); ?></h2>
 
 <form method="post" action="options.php">
 	<?php settings_fields('prm'); ?>
 	<?php do_settings_sections('prm'); ?>
 <table class="form-table">
+
+<tr>
+<th scope="row" colspan="2">
+	<h3><?php _e('Configurações de inscrição', 'prm'); ?></h3>
+</th>
+</tr>
 
 <tr>
 <th scope="row"><label for="prm-email"><?php _e('Email administrativo', 'prm'); ?></label></th>
@@ -20,6 +26,32 @@
 </tr>
 
 <tr>
+<th scope="row"><label for="prm-subscription-amount"><?php _e('Valor', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text" name="prm_subscription_amount" id="prm-subscription-amount" value="<?php echo get_option('prm_subscription_amount'); ?>" />
+  <p class="description"><?php _e('O valor mensal da inscrição, em reais.', 'prm'); ?></p>
+</td>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-item-name"><?php _e('Nome do item de assinatura', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text" name="prm_subscription_item_name" id="prm-subscription-item-name" value="<?php echo get_option('prm_subscription_item_name'); ?>" placeholder="<?php echo bloginfo('name'); ?>" />
+	<p class="description">
+		<?php _e('Nome que será exibido na página de checkout da assinatura.', 'prm'); ?>
+		<br>
+		<?php _e('Deixe em branco para usar o nome do site.', 'prm'); ?>
+	</p>
+</td>
+</tr>
+
+<tr>
+<th scope="row" colspan="2">
+	<h3><?php _e('Configurações do PayPal', 'prm'); ?></h3>
+</th>
+</tr>
+
+<tr>
 <th scope="row"><label for="prm-paypal-email"><?php _e('Email do PayPal', 'prm'); ?></label></th>
 <td>
 	<input type="text" class="regular-text" name="prm_paypal_email" id="prm-paypal-email" value="<?php echo get_option('prm_paypal_email'); ?>" />
@@ -30,36 +62,31 @@
 </tr>
 
 <tr>
-<th scope="row"><label for="prm-subscription-paypal-item-name"><?php _e('Descrição do item do PayPal', 'prm'); ?></label></th>
+<th scope="row" colspan="2">
+	<h3><?php _e('Configurações do PagSeguro', 'prm'); ?></h3>
+</th>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-pagseguro-email"><?php _e('Email do PagSeguro', 'prm'); ?></label></th>
 <td>
-	<input type="text" class="regular-text" name="prm_subscription_paypal_item_name" id="prm-subscription-paypal-item-name" value="<?php echo get_option('prm_subscription_paypal_item_name'); ?>" />
-	<p class="description">
-		<?php _e('Descrição do item do PayPal. Será exibida na página de checkout.', 'prm'); ?>
-	</p>
+	<input type="text" class="regular-text" name="prm_pagseguro_email" id="prm-pagseguro-email" value="<?php echo get_option('prm_pagseguro_email'); ?>" />
+  <p class="description"><?php _e('Endereço de email da sua conta PagSeguro.', 'prm'); ?></p>
 </td>
 </tr>
 
 <tr>
-<th scope="row"><label for="prm-subscription-paypal-item-number"><?php _e('ID de inscrição do PayPal', 'prm'); ?></label></th>
+<th scope="row"><label for="prm-pagseguro-token"><?php _e('Token do PagSeguro', 'prm'); ?></label></th>
 <td>
-	<input type="text" class="regular-text" name="prm_subscription_paypal_item_number" id="prm-subscription-paypal-item-number" value="<?php echo get_option('prm_subscription_paypal_item_number'); ?>" />
-	<p class="description">
-		<?php _e('Apenas para uso interno. Você pode utilizar este campo para identificar as inscrições feitas pelo site.', 'prm'); ?>
-	</p>
+	<input type="text" class="regular-text" name="prm_pagseguro_token" id="prm-pagseguro-token" value="<?php echo get_option('prm_pagseguro_token'); ?>" />
+  <p class="description"><?php _e('Token da sua conta PagSeguro.', 'prm'); ?></p>
 </td>
 </tr>
 
 <tr>
-<th scope="row"><label for="prm-subscription-paypal-amount"><?php _e('Valor', 'prm'); ?></label></th>
-<td>
-	<input type="text" class="regular-text" name="prm_subscription_paypal_amount" id="prm-subscription-paypal-amount" value="<?php echo get_option('prm_subscription_paypal_amount'); ?>" />
-  <?php $prm_subscription_paypal_currency = get_option('prm_subscription_paypal_currency'); ?>
-  <select id="prm-subscription-paypal-currency" name="prm_subscription_paypal_currency">
-    <option value="USD" <?php if ('USD' == $prm_subscription_paypal_currency) { echo 'selected="selected"'; } ?>><?php _e('USD', 'mmdimo'); ?></option>
-    <option value="BRL" <?php if ('BRL' == $prm_subscription_paypal_currency) { echo 'selected="selected"'; } ?>><?php _e('BRL', 'mmdimo'); ?></option>
-  </select>
-  <p class="description"><?php _e('O valor da inscrição.', 'prm'); ?></p>
-</td>
+<th scope="row" colspan="2">
+	<h3><?php _e('Configurações da página de resposta', 'prm'); ?></h3>
+</th>
 </tr>
 
 <tr>
