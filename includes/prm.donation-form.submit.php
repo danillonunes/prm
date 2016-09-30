@@ -176,9 +176,11 @@ function prm_donation_form_submit_result($values) {
 	$html = '';
 
 	switch ($values['payment-method']) {
+		case 'paypal':
+		case 'pagseguro':
 		case 'deposito':
 		case 'boleto':
-			$html = get_option('prm_subscription_' . $values['payment-method'] . '_message');
+			$html = wpautop(get_option('prm_subscription_' . $values['payment-method'] . '_message'));
 			break;
 	}
 
