@@ -39,7 +39,7 @@ function prm_subscription_message() {
 			case 'pagseguro':
 			case 'deposito':
 			case 'boleto':
-				$html = wpautop(get_option('prm_subscription_' . $_REQUEST['prm-donation-payment-method'] . '_message'));
+				$html = prm_get_option('prm_subscription_' . $_REQUEST['prm-donation-payment-method'] . '_message');
 				break;
 		}
 	}
