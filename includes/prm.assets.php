@@ -23,7 +23,7 @@ function prm_admin_scripts($hook) {
 			wp_enqueue_script('prm.jQuery-Mask-Plugin', PRM_PLUGIN_DIR_URL . 'assets/lib/jQuery-Mask-Plugin-1.14.0/dist/jquery.mask.min.js', array(
 				'jquery',
 			));
-			wp_enqueue_script('mmdimo-options', PRM_PLUGIN_DIR_URL . 'assets/js/mmdimo.options.js');
+			wp_enqueue_script('mmdimo-options', PRM_PLUGIN_DIR_URL . 'assets/js/prm.options.js');
 			break;
 	}
 }

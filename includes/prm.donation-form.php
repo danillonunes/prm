@@ -5,15 +5,21 @@ add_action('plugins_loaded', 'prm_subscription_submit');
 function prm_subscription_submit() {
 	if (isset($_POST['prm-donation-form-submit'])) {
 		include_once(PRM_PLUGIN_DIR . '/includes/prm.donation-form.submit.php');
-		$values = prm_donation_form_values($_POST);
-		$payment = prm_donation_form_submit_payment($values);
 
-		if ($payment['status'] == 'completed') {
-			prm_donation_form_submit_email($values);
+		if ($error = prm_donation_form_validate($_POST)) {
+			prm_donation_form_error($error);
 		}
-		if (isset($payment['redirect'])) {
-			wp_redirect($payment['redirect']);
-			exit;
+		else {
+			$values = prm_donation_form_values($_POST);
+			$payment = prm_donation_form_submit_payment($values);
+
+			if ($payment['status'] == 'completed') {
+				prm_donation_form_submit_email($values);
+			}
+			if (isset($payment['redirect'])) {
+				wp_redirect($payment['redirect']);
+				exit;
+			}
 		}
 	}
 }
@@ -21,13 +27,23 @@ function prm_subscription_submit() {
 function prm_donation_form() {
 	$html = '';
 
-	if (!isset($_POST['prm-donation-form-submit'])) {
+	if (!isset($_POST['prm-donation-form-submit']) || prm_donation_form_error()) {
 		ob_start();
 		include(PRM_PLUGIN_DIR . '/includes/prm.donation-form.html.php');
 		$html = ob_get_clean();
 	}
 
 	return $html;
+}
+
+function prm_donation_form_error($error = FALSE) {
+	static $static_error;
+
+	if ($error) {
+		$static_error = $error;
+	}
+
+	return $static_error;
 }
 
 function prm_subscription_message() {

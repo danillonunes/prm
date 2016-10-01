@@ -1,3 +1,10 @@
+.prm-donation-form-error {
+	background-color: #f2dede;
+	border-color: #ebccd1;
+	border-radius: 4px;
+	color: #a94442;
+	padding: 10px 15px;
+}
 .prm-donation-form-element {
 	box-sizing: border-box;
 	margin: 10px 0;
@@ -6,6 +13,14 @@
 }
 .prm-donation-form-element label {
 	display: block;
+}
+.prm-donation-form-element-error input[type="text"],
+.prm-donation-form-element-error input[type="email"],
+.prm-donation-form-element-error select {
+	border: 1px solid #a94442;
+}
+.prm-donation-form-payment-method.prm-donation-form-element-error {
+	color: #a94442;
 }
 .prm-donation-form-name {
 	width: 65%;

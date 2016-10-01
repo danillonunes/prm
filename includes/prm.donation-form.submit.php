@@ -1,5 +1,45 @@
 <?php
 
+function prm_donation_form_validate($post) {
+	$error = array();
+
+	foreach ($post as $key => $value) {
+		switch ($key) {
+			case 'prm-donation-form-name':
+			case 'prm-donation-form-email':
+			case 'prm-donation-form-phone':
+			case 'prm-donation-form-address-thoroughfare':
+			case 'prm-donation-form-address-dependent-locality':
+			case 'prm-donation-form-address-locality':
+			case 'prm-donation-form-address-administrative-area':
+			case 'prm-donation-form-address-postal-code':
+			case 'prm-donation-form-payment-method':
+				if ($value == '') {
+					$error[] = array(
+						'error' => 'empty',
+						'field' => $key
+					);
+				}
+				break;
+		}
+
+		switch ($key) {
+			case 'prm-donation-form-email':
+				if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+					$error[] = array(
+						'error' => 'invalid',
+						'field' => $key
+					);
+				}
+				break;
+		}
+	}
+
+	if (!empty($error)) {
+		return $error;
+	}
+}
+
 function prm_donation_form_values($post) {
 	$values = array(
 		'name' => $post['prm-donation-form-name'],

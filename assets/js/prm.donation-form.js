@@ -10,6 +10,9 @@ var phoneMaskOptions = {
 };
 
 $(function(){
+	var $form = $('#prm-donation-form');
+	var $required = $form.find('[required]');
+	var $paymentMethods = $form.find('.prm-donation-form-payment-method input');
 	var $phone = $('#prm-donation-form-phone');
 	var $postal = $('#prm-donation-form-address-postal-code');
 	var $postalEl = $postal.parents('.prm-donation-form-element');
@@ -19,6 +22,33 @@ $(function(){
 	var $dependentLocality = $('#prm-donation-form-address-dependent-locality');
 	var $thoroughfare = $('#prm-donation-form-address-thoroughfare');
 	var $premise = $('#prm-donation-form-address-premise');
+
+	$form
+		.on('submit', function(e) {
+			var error = false;
+			$required.each(function() {
+				$input = $(this);
+				if ($input.val() == '') {
+					error = true;
+					$input.parents('.prm-donation-form-element').addClass('prm-donation-form-element-error');
+				}
+			});
+
+			if (!$paymentMethods.filter(':checked').length) {
+				error = true;
+				$paymentMethods.parents('.prm-donation-form-element').addClass('prm-donation-form-element-error');
+			}
+
+			if (error) {
+				$('html, body').scrollTop($form.offset().top);
+				return false;
+			}
+		});
+
+	$required.add($paymentMethods)
+		.on('change', function() {
+			$(this).parents('.prm-donation-form-element').removeClass('prm-donation-form-element-error');
+		});
 
 	$phone.mask(phoneMaskCallback, phoneMaskOptions);
 
@@ -51,10 +81,10 @@ $(function(){
 						$postal.trigger('loading-error');
 					}
 					else {
-						$administrativeArea.val(data.uf);
-						$locality.val(data.localidade);
-						$dependentLocality.val(data.bairro);
-						$thoroughfare.val(data.logradouro);
+						$administrativeArea.val(data.uf).trigger('change');
+						$locality.val(data.localidade).trigger('change');
+						$dependentLocality.val(data.bairro).trigger('change');
+						$thoroughfare.val(data.logradouro).trigger('change');
 						$premise.trigger('focus');
 						$postal.trigger('loading-clean');
 					}
