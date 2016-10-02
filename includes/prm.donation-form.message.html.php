@@ -1,32 +1,47 @@
 <?php defined( 'ABSPATH' ) or die( 'No direct access allowed.' ); ?>
-<p>
-	<?php _e('Você tem uma nova inscrição em seu site.', 'prm'); ?>
-	<br>
-	<?php _e('Seguem os dados do usuário:', 'prm'); ?>
-</p>
+<?php _e('Você tem uma nova inscrição em seu site.', 'prm'); ?>
+<br>
+<?php _e('Seguem os dados do usuário:', 'prm'); ?>
 
-<p>
-	<strong><?php _e('Nome', 'prm'); ?>:</strong>
-	<br>
-	<?php echo $name; ?>
-	<br>
-	<strong><?php _e('Email', 'prm'); ?>:</strong>
-	<br>
-	<?php echo $email; ?>
+<br>
+<br>
+
+<strong><?php _e('Nome', 'prm'); ?>:</strong>
+<br>
+<?php echo $name; ?>
+<br>
+<strong><?php _e('Email', 'prm'); ?>:</strong>
+<br>
+<?php echo $email; ?>
+<?php if ($phone): ?>
 	<br>
 	<strong><?php _e('Telefone', 'prm'); ?>:</strong>
 	<br>
 	<?php echo $phone; ?>
+<?php endif; ?>
+<?php if ($thoroughfare || $premise || $sub_premise || $dependent_locality || $locality || $administrative_area || $postal_code): ?>
 	<br>
 	<strong><?php _e('Endereço', 'prm'); ?>:</strong>
-	<br>
-	<?php echo $thoroughfare; ?>, <?php echo $premise; ?><?php if ($sub_premise): echo ', ' . $sub_premise; endif; ?>
-	<br>
-	<?php echo $dependent_locality; ?>, <?php echo $locality; ?>, <?php echo $administrative_area; ?>
-	<br>
-	<?php echo $postal_code; ?>
-</p>
+	<?php if ($thoroughfare || $premise || $sub_premise): ?>
+		<br>
+		<?php echo $thoroughfare; ?>, <?php echo $premise; ?><?php if ($sub_premise): echo ', ' . $sub_premise; endif; ?>
+	<?php endif; ?>
+	<?php if ($dependent_locality || $locality || $administrative_area): ?>
+		<br>
+		<?php echo $dependent_locality; ?>, <?php echo $locality; ?>, <?php echo $administrative_area; ?>
+	<?php endif; ?>
+	<?php if ($postal_code): ?>
+		<br>
+		<?php echo $postal_code; ?>
+	<?php endif; ?>
+<?php endif; ?>
 
-<p>
-	<?php _e('Forma de pagamento', 'prm'); ?>: <?php echo $payment_method; ?>
-</p>
+<br>
+<br>
+
+<?php _e('Forma de pagamento', 'prm'); ?>: <?php echo $payment_method; ?>
+
+<br>
+<br>
+
+<?php _e('Valor', 'prm'); ?>: R$ <?php echo $subscription_amount; ?>

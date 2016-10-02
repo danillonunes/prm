@@ -43,19 +43,20 @@
 	float: left;
 }
 .prm-donation-form-address-postal-code {
-	width: 100%;
-}
-#prm-donation-form-address-postal-code {
-	float: left;
-	width: 20%;
+	position: relative;
+	width: 35%;
 }
 .prm-donation-form-address-postal-code .msg {
-	float: left;
-	margin: 6px 10px;
+	bottom: 0;
+	margin-right: -100%;
+	position: absolute;
+	right: 0;
+	width: 100%;
 }
 .prm-donation-form-address-postal-code.loading .msg {
 	background: url('../img/load.gif');
 	display: block;
+	margin-right: -16px;
 	height: 16px;
 	text-indent: -99999px;
 	width: 16px;
@@ -81,4 +82,14 @@
 }
 .prm-donation-form-address-administrative-area select {
 	display: block;
+}
+.prm-donation-form-subscription-amount {
+	width: 25%;
+}
+.prm-donation-form-subscription-amount span,
+.prm-donation-form-subscription-amount input {
+	display: inline-block;
+}
+.prm-donation-form-subscription-amount input[type="text"] {
+	width: 50%;
 }

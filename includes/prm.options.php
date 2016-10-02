@@ -7,6 +7,7 @@ function prm_options_admin_init() {
 	register_setting('prm', 'prm_email');
 	register_setting('prm', 'prm_subscription_amount');
 	register_setting('prm', 'prm_subscription_item_name');
+	register_setting('prm', 'prm_subscription_address_description');
 	register_setting('prm', 'prm_sandbox_mode');
 	register_setting('prm', 'prm_paypal_email');
 	register_setting('prm', 'prm_paypal_sandbox_email');
@@ -59,6 +60,7 @@ function prm_get_option($option) {
 	}
 
 	switch ($option) {
+		case 'prm_subscription_address_description':
 		case 'prm_subscription_paypal_message':
 		case 'prm_subscription_pagseguro_message':
 		case 'prm_subscription_deposito_message':

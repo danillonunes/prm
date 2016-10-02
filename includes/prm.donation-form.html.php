@@ -6,33 +6,40 @@
 			<div class="prm-donation-form-error"><?php _e('Verifique os valores preenchidos e tente novamente.', 'prm'); ?></div>
 		<?php endif; ?>
 
-		<div class="prm-donation-form-element prm-donation-form-name">
-			<label for="prm-donation-form-name"><?php _e('Nome', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span></label>
-			<input type="text" name="prm-donation-form-name" id="prm-donation-form-name" value="<?php echo $_POST['prm-donation-form-name']; ?>" required="required">
-		</div>
+		<div class="prm-donation-form-personal">
+			<h4><?php _e('Dados pessoais', 'prm'); ?></h4>
+			<div class="prm-donation-form-element prm-donation-form-name">
+				<label for="prm-donation-form-name"><?php _e('Nome', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span></label>
+				<input type="text" name="prm-donation-form-name" id="prm-donation-form-name" value="<?php echo $_POST['prm-donation-form-name']; ?>" required="required">
+			</div>
 
-		<div class="prm-donation-form-element prm-donation-form-email">
-			<label for="prm-donation-form-email"><?php _e('Email', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span></label>
-			<input type="email" name="prm-donation-form-email" id="prm-donation-form-email" value="<?php echo $_POST['prm-donation-form-email']; ?>" required="required">
-		</div>
+			<div class="prm-donation-form-element prm-donation-form-email">
+				<label for="prm-donation-form-email"><?php _e('Email', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span></label>
+				<input type="email" name="prm-donation-form-email" id="prm-donation-form-email" value="<?php echo $_POST['prm-donation-form-email']; ?>" required="required">
+			</div>
 
-		<div class="prm-donation-form-element prm-donation-form-phone">
-			<label for="prm-donation-form-phone"><?php _e('Telefone', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span></label>
-			<input type="text" name="prm-donation-form-phone" id="prm-donation-form-phone" value="<?php echo $_POST['prm-donation-form-phone']; ?>" required="required">
+			<div class="prm-donation-form-element prm-donation-form-phone">
+				<label for="prm-donation-form-phone"><?php _e('Telefone', 'prm'); ?></label>
+				<input type="text" name="prm-donation-form-phone" id="prm-donation-form-phone" value="<?php echo $_POST['prm-donation-form-phone']; ?>">
+			</div>
 		</div>
 
 		<div class="prm-donation-form-address">
+			<h4><?php _e('Endereço', 'prm'); ?></h4>
+			<?php if ($address_description = prm_get_option('prm_subscription_address_description')): ?>
+				<p class="description"><?php echo $address_description; ?></p>
+			<?php endif; ?>
 			<div class="prm-donation-form-element prm-donation-form-address-postal-code">
 				<label for="prm-donation-form-address-postal-code">
-					<?php _e('CEP', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
+					<?php _e('CEP', 'prm'); ?>
 				</label>
-				<input type="text" name="prm-donation-form-address-postal-code" id="prm-donation-form-address-postal-code" value="<?php echo $_POST['prm-donation-form-address-postal-code']; ?>" required="required">
+				<input type="text" name="prm-donation-form-address-postal-code" id="prm-donation-form-address-postal-code" value="<?php echo $_POST['prm-donation-form-address-postal-code']; ?>">
 			</div>
 
 			<div class="prm-donation-form-element prm-donation-form-address-thoroughfare">
 				<label>
-					<?php _e('Logradouro', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
-					<input type="text" name="prm-donation-form-address-thoroughfare" id="prm-donation-form-address-thoroughfare" value="<?php echo $_POST['prm-donation-form-address-thoroughfare']; ?>" required="required">
+					<?php _e('Logradouro', 'prm'); ?>
+					<input type="text" name="prm-donation-form-address-thoroughfare" id="prm-donation-form-address-thoroughfare" value="<?php echo $_POST['prm-donation-form-address-thoroughfare']; ?>">
 				</label>
 			</div>
 
@@ -52,22 +59,22 @@
 
 			<div class="prm-donation-form-element prm-donation-form-address-dependent-locality">
 				<label>
-					<?php _e('Bairro', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
-					<input type="text" name="prm-donation-form-address-dependent-locality" id="prm-donation-form-address-dependent-locality" value="<?php echo $_POST['prm-donation-form-address-dependent-locality']; ?>" required="required">
+					<?php _e('Bairro', 'prm'); ?>
+					<input type="text" name="prm-donation-form-address-dependent-locality" id="prm-donation-form-address-dependent-locality" value="<?php echo $_POST['prm-donation-form-address-dependent-locality']; ?>">
 				</label>
 			</div>
 
 			<div class="prm-donation-form-element prm-donation-form-address-locality">
 				<label>
-					<?php _e('Cidade', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
-					<input type="text" name="prm-donation-form-address-locality" id="prm-donation-form-address-locality" value="<?php echo $_POST['prm-donation-form-address-locality']; ?>" required="required">
+					<?php _e('Cidade', 'prm'); ?>
+					<input type="text" name="prm-donation-form-address-locality" id="prm-donation-form-address-locality" value="<?php echo $_POST['prm-donation-form-address-locality']; ?>">
 				</label>
 			</div>
 
 			<div class="prm-donation-form-element prm-donation-form-address-administrative-area">
 				<label>
-					<?php _e('Estado', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
-					<select name="prm-donation-form-address-administrative-area" id="prm-donation-form-address-administrative-area" required="required">
+					<?php _e('Estado', 'prm'); ?>
+					<select name="prm-donation-form-address-administrative-area" id="prm-donation-form-address-administrative-area">
 						<option value=""><?php _e('--', 'prm'); ?></option>
 						<option value="AC" <?php if ('AC' == $_POST['prm-donation-form-address-administrative-area']) { echo 'selected="selected"'; } ?>><?php _e('Acre', 'prm'); ?></option>
 						<option value="AL" <?php if ('AL' == $_POST['prm-donation-form-address-administrative-area']) { echo 'selected="selected"'; } ?>><?php _e('Alagoas', 'prm'); ?></option>
@@ -130,6 +137,11 @@
 					<?php _e('Depósito', 'prm'); ?>
 				</label>
 			</div>
+		</div>
+
+		<div class="prm-donation-form-element prm-donation-form-subscription-amount">
+			<label for="prm-donation-form-subscription-amount"><?php _e('Valor (mensal)', 'prm'); ?></label>
+			<span><?php _e('R$', 'prm'); ?></span> <input type="text" name="prm-donation-form-subscription-amount" id="prm-donation-form-subscription-amount" value="<?php echo $_POST['prm-donation-form-subscription-amount']; ?>" placeholder="<?php echo get_option('prm_subscription_amount'); ?>">
 		</div>
 
 		<div class="prm-donation-form-element prm-donation-form-buttons">

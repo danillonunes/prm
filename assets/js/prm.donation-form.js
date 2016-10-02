@@ -22,6 +22,7 @@ $(function(){
 	var $dependentLocality = $('#prm-donation-form-address-dependent-locality');
 	var $thoroughfare = $('#prm-donation-form-address-thoroughfare');
 	var $premise = $('#prm-donation-form-address-premise');
+	var $amount = $('#prm-donation-form-subscription-amount');
 
 	$form
 		.on('submit', function(e) {
@@ -50,6 +51,24 @@ $(function(){
 			$(this).parents('.prm-donation-form-element').removeClass('prm-donation-form-element-error');
 		});
 
+	$amount.mask('#.##0,00', {reverse: true});
+
+	$paymentMethods
+		.on('change', function() {
+			$paymentMethods
+				.parents('div').removeClass('prm-donation-form-element-checked');
+			$paymentMethods.filter(':checked')
+				.parents('div').addClass('prm-donation-form-element-checked');
+
+			if ($paymentMethods.filter('#prm-donation-form-payment-method-paypal:checked,#prm-donation-form-payment-method-pagseguro:checked').length) {
+				$amount.parents('.prm-donation-form-element').show();
+			}
+			else {
+				$amount.parents('.prm-donation-form-element').hide();
+			}
+		})
+		.trigger('change');
+
 	$phone.mask(phoneMaskCallback, phoneMaskOptions);
 
 	$postal
@@ -60,12 +79,12 @@ $(function(){
 		})
 		.on('loading-error', function() {
 			$postal.trigger('loading-clean');
-			$postalEl.addClass('error');
-			$postalMsg.text('Não foi encontrado um endereço para o CEP informado.');
+			$postalEl.addClass('prm-donation-form-element-error');
+			$postalMsg.text('CEP não encontrado.');
 		})
 		.on('loading-clean', function() {
 			$postalEl
-				.removeClass('error')
+				.removeClass('prm-donation-form-element-error')
 				.removeClass('loading');
 			$postalMsg.text('');
 		})

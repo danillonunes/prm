@@ -7,12 +7,6 @@ function prm_donation_form_validate($post) {
 		switch ($key) {
 			case 'prm-donation-form-name':
 			case 'prm-donation-form-email':
-			case 'prm-donation-form-phone':
-			case 'prm-donation-form-address-thoroughfare':
-			case 'prm-donation-form-address-dependent-locality':
-			case 'prm-donation-form-address-locality':
-			case 'prm-donation-form-address-administrative-area':
-			case 'prm-donation-form-address-postal-code':
 			case 'prm-donation-form-payment-method':
 				if ($value == '') {
 					$error[] = array(
@@ -32,6 +26,13 @@ function prm_donation_form_validate($post) {
 					);
 				}
 				break;
+			case 'prm-donation-subscription-amount':
+				if (preg_replace('/[^\d]/', '', $value) < 100) {
+					$error[] = array(
+						'error' => 'invalid',
+						'field' => $key
+					);
+				}
 		}
 	}
 
@@ -55,6 +56,7 @@ function prm_donation_form_values($post) {
 			'postal-code' => $post['prm-donation-form-address-postal-code'],
 		),
 		'payment-method' => $post['prm-donation-form-payment-method'],
+		'subscription-amount' => $post['prm-donation-form-subscription-amount'] ? preg_replace('/,/', '.', preg_replace('/./', '', $post['prm-donation-form-subscription-amount'])) : prm_get_option('prm_subscription_amount'),
 	);
 
 	$name = explode(' ', $values['name']);
@@ -103,15 +105,16 @@ function prm_donation_form_submit_payment_paypal($values) {
 	$params['item_name'] = prm_get_option('prm_subscription_item_name');
 	$params['item_number'] = '';
 	$params['src'] = '1';
-	$params['a3'] = prm_get_option('prm_subscription_amount');
+	$params['a3'] = $values['subscription-amount'];
 	$params['p3'] = '1';
 	$params['t3'] = 'M';
 	$params['no_shipping'] = '1';
 	$params['currency_code'] = 'BRL';
 	$params['bn'] = 'PP-SubscriptionsBF:btn_subscribeCC_LG.gif:NonHosted';
 	$params['charset'] = 'UTF-8';
-	$params['notify_url'] = '';
-
+	$site_url = site_url();
+	$site_url = (strpos('?', $site_url) === FALSE ? $site_url . '?' : $site_url . '&') . 'prm_subscription_paypal_return=1';
+	$params['notify_url'] = urlencode(stripslashes($site_url));
 
 	$params['first_name'] = $values['first-name'];
 	$params['last_name'] = $values['last-name'];
@@ -163,10 +166,10 @@ function prm_donation_form_submit_payment_pagseguro($values) {
 
 	$pre_params['preApprovalCharge'] = 'auto';
 	$pre_params['preApprovalName'] = prm_get_option('prm_subscription_item_name');
-	$pre_params['preApprovalAmountPerPayment'] = prm_get_option('prm_subscription_amount');
+	$pre_params['preApprovalAmountPerPayment'] = $values['subscription-amount'];
 	$pre_params['preApprovalPeriod'] = 'monthly';
 	$pre_params['preApprovalFinalDate'] = date('Y-m-d\TH:i:s.uP', strtotime("+2 years"));
-	$pre_params['preApprovalMaxTotalAmount'] = sprintf('%01.2f', prm_get_option('prm_subscription_amount') * 24);
+	$pre_params['preApprovalMaxTotalAmount'] = sprintf('%01.2f', $values['subscription-amount'] * 24);
 
 	$pre_params['receiverEmail'] = prm_get_option('prm_pagseguro_email');
 
@@ -235,6 +238,8 @@ function prm_donation_form_submit_email_message($values) {
 	$locality = $values['address']['locality'];
 	$administrative_area = $values['address']['administrative-area'];
 	$postal_code = $values['address']['postal-code'];
+
+	$subscription_amount = preg_replace('/\./', ',', $values['subscription-amount']);
 
 	$payment_methods = array(
 		'paypal' => __('PayPal', 'prm'),

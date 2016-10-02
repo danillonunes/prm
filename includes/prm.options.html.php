@@ -46,6 +46,18 @@
 </tr>
 
 <tr>
+<th scope="row"><label for="prm-subscription-address-description"><?php _e('Descrição do endereço', 'prm'); ?></label></th>
+<td>
+	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_address_description" id="prm-subscription-address-description"><?php echo get_option('prm_subscription_address_description'); ?></textarea>
+	<p class="description">
+		<?php _e('Mensagem de ajuda que será exibida no campo <b>endereço</b> na página de inscrição.', 'prm'); ?>
+		<br>
+		<?php _e('Você pode usar código HTML.', 'prm'); ?>
+	</p>
+</td>
+</tr>
+
+<tr>
 <th scope="row"><label for="prm-sandbox-mode"><?php _e('Modo de teste', 'prm'); ?></label></th>
 <td>
 	<label>
@@ -151,7 +163,7 @@
 <td>
 	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_paypal_message" id="prm-subscription-paypal-message"><?php echo get_option('prm_subscription_paypal_message'); ?></textarea>
 	<p class="description">
-		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <strong>PayPal</strong> como forma de pagamento.', 'prm'); ?>
+		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <b>PayPal</b> como forma de pagamento.', 'prm'); ?>
 		<br>
 		<?php _e('Você pode usar código HTML.', 'prm'); ?>
 	</p>
@@ -163,7 +175,7 @@
 <td>
 	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_pagseguro_message" id="prm-subscription-pagseguro-message"><?php echo get_option('prm_subscription_pagseguro_message'); ?></textarea>
 	<p class="description">
-		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <strong>PagSeguro</strong> como forma de pagamento.', 'prm'); ?>
+		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <b>PagSeguro</b> como forma de pagamento.', 'prm'); ?>
 		<br>
 		<?php _e('Você pode usar código HTML.', 'prm'); ?>
 	</p>
@@ -175,7 +187,7 @@
 <td>
 	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_boleto_message" id="prm-subscription-boleto-message"><?php echo get_option('prm_subscription_boleto_message'); ?></textarea>
 	<p class="description">
-		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <strong>boleto</strong> como forma de pagamento.', 'prm'); ?>
+		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <b>boleto</b> como forma de pagamento.', 'prm'); ?>
 		<br>
 		<?php _e('Você pode usar código HTML.', 'prm'); ?>
 	</p>
@@ -187,7 +199,7 @@
 <td>
 	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_deposito_message" id="prm-subscription-deposito-message"><?php echo get_option('prm_subscription_deposito_message'); ?></textarea>
 	<p class="description">
-		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <strong>depósito</strong> como forma de pagamento.', 'prm'); ?>
+		<?php _e('Mensagem que será exibida ao usuário após inscrever-se usando <b>depósito</b> como forma de pagamento.', 'prm'); ?>
 		<br>
 		<?php _e('Você pode usar código HTML.', 'prm'); ?>
 	</p>
