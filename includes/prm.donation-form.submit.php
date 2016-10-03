@@ -80,19 +80,49 @@ function prm_donation_form_values($post) {
 	return $values;
 }
 
-function prm_donation_form_submit_payment($values) {
-	switch ($values['payment-method']) {
-		case 'paypal':
-			return prm_donation_form_submit_payment_paypal($values);
-		case 'pagseguro':
-			return prm_donation_form_submit_payment_pagseguro($values);
-		case 'boleto':
-		case 'deposito':
-			return prm_donation_form_submit_payment_redirect($values);
+function prm_donation_form_submit_save($values) {
+	global $wpdb;
+
+	$data = array(
+		'time' => current_time('mysql'),
+		'name' => $values['name'],
+		'email' => $values['email'],
+		'phone' => $values['phone'],
+		'address_thoroughfare' => $values['address']['thoroughfare'],
+		'address_premise' => $values['address']['premise'],
+		'address_sub_premise' => $values['address']['sub-premise'],
+		'address_dependent_locality' => $values['address']['dependent-locality'],
+		'address_locality' => $values['address']['locality'],
+		'address_administrative_area' => $values['address']['administrative-area'],
+		'address_postal_code' => $values['address']['postal-code'],
+		'payment_method' => $values['payment-method'],
+		'payment_status' => 'pending',
+		'subscription_amount' => $values['subscription-amount'],
+	);
+
+	$insert = $wpdb->insert(
+		prm_patrons_table_name(),
+		$data
+	);
+
+	if ($insert) {
+		return $wpdb->insert_id;
 	}
 }
 
-function prm_donation_form_submit_payment_paypal($values) {
+function prm_donation_form_submit_payment($id, $values) {
+	switch ($values['payment-method']) {
+		case 'paypal':
+			return prm_donation_form_submit_payment_paypal($id, $values);
+		case 'pagseguro':
+			return prm_donation_form_submit_payment_pagseguro($id, $values);
+		case 'boleto':
+		case 'deposito':
+			return prm_donation_form_submit_payment_redirect($id, $values);
+	}
+}
+
+function prm_donation_form_submit_payment_paypal($id, $values) {
 	$paypal_url = 'https://www.paypal.com/cgi-bin/webscr';
 	if (prm_get_option('prm_sandbox_mode')) {
 		$paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
@@ -108,13 +138,15 @@ function prm_donation_form_submit_payment_paypal($values) {
 	$params['a3'] = $values['subscription-amount'];
 	$params['p3'] = '1';
 	$params['t3'] = 'M';
+	$params['rm'] = '2';
 	$params['no_shipping'] = '1';
 	$params['currency_code'] = 'BRL';
 	$params['bn'] = 'PP-SubscriptionsBF:btn_subscribeCC_LG.gif:NonHosted';
 	$params['charset'] = 'UTF-8';
+
 	$site_url = site_url();
-	$site_url = (strpos('?', $site_url) === FALSE ? $site_url . '?' : $site_url . '&') . 'prm_subscription_paypal_return=1';
-	$params['notify_url'] = urlencode(stripslashes($site_url));
+	$site_url = (strpos('?', $site_url) === FALSE ? $site_url . '?' : $site_url . '&') . 'prm_subscription_return=paypal&prm_subscription_patron_id=' . $id;
+	$params['notify_url'] = $site_url;
 
 	$params['first_name'] = $values['first-name'];
 	$params['last_name'] = $values['last-name'];
@@ -132,17 +164,17 @@ function prm_donation_form_submit_payment_paypal($values) {
 	$return_url = strpos('?', $return_url) === FALSE ? $return_url . '?' : $return_url . '&';
 	$return_url = $return_url . 'prm-donation-payment-method=paypal';
 
-	$params['return'] = urlencode(stripslashes($return_url));
+	$params['return'] = $return_url;
 
 	$url = $paypal_url . '?' . utf8_encode(http_build_query($params));
 
 	return array(
-		'status' => 'processing',
+		'status' => 'pending',
 		'redirect' => $url
 	);
 }
 
-function prm_donation_form_submit_payment_pagseguro($values) {
+function prm_donation_form_submit_payment_pagseguro($id, $values) {
 	$pagseguro_pre_url = 'https://ws.pagseguro.uol.com.br/v2/pre-approvals/request';
 	if (prm_get_option('prm_sandbox_mode')) {
 		$pagseguro_pre_url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/request';
@@ -197,13 +229,13 @@ function prm_donation_form_submit_payment_pagseguro($values) {
 		}
 
 		return array(
-			'status' => 'processing',
+			'status' => 'pending',
 			'redirect' => $url
 		);
 	}
 }
 
-function prm_donation_form_submit_payment_redirect($values) {
+function prm_donation_form_submit_payment_redirect($id, $values) {
 	$url = prm_get_option('prm_subscription_return_url');
 	$url = strpos('?', $url) === FALSE ? $url . '?' : $url . '&';
 	$url = $url . 'prm-donation-payment-method=' . $values['payment-method'];
@@ -214,32 +246,34 @@ function prm_donation_form_submit_payment_redirect($values) {
 	);
 }
 
-function prm_donation_form_submit_email($values) {
+function prm_donation_form_submit_email($id) {
+	$subscription = prm_subscription_load($id);
+
 	$to = prm_get_option('prm_email');
-	$subject = sprintf(__('%s fez uma nova inscrição em %s'), $values['name'], get_bloginfo('name'));
-	$message = prm_donation_form_submit_email_message($values);
+	$subject = sprintf(__('%s fez uma nova inscrição em %s'), $subscription->name, get_bloginfo('name'));
+	$message = prm_donation_form_submit_email_message($subscription);
 
 	$headers[] = 'Content-Type: text/html; charset=UTF-8';
-	$headers[] = 'Reply-To: ' . $values['name'] . ' <' . $values['email'] . '>';
+	$headers[] = 'Reply-To: ' . $subscription->name . ' <' . $subscription->mail . '>';
 
 	return wp_mail($to, $subject, $message, $headers);
 }
 
-function prm_donation_form_submit_email_message($values) {
-	$name = $values['name'];
-	$email = $values['email'];
-	$phone = $values['phone'];
+function prm_donation_form_submit_email_message($subscription) {
+	$name = $subscription->name;
+	$email = $subscription->email;
+	$phone = $subscription->phone;
 
-	$thoroughfare = $values['address']['thoroughfare'];
-	$premise = $values['address']['premise'];
-	$sub_premise = $values['address']['sub-premise'];
+	$thoroughfare = $subscription->address_thoroughfare;
+	$premise = $subscription->address_premise;
+	$sub_premise = $subscription->address_sub_premise;
 
-	$dependent_locality = $values['address']['dependent-locality'];
-	$locality = $values['address']['locality'];
-	$administrative_area = $values['address']['administrative-area'];
-	$postal_code = $values['address']['postal-code'];
+	$dependent_locality = $subscription->address_dependent_locality;
+	$locality = $subscription->address_locality;
+	$administrative_area = $subscription->address_administrative_area;
+	$postal_code = $subscription->address_postal_code;
 
-	$subscription_amount = preg_replace('/\./', ',', $values['subscription-amount']);
+	$subscription_amount = preg_replace('/\./', ',', $subscription->subscription_amount);
 
 	$payment_methods = array(
 		'paypal' => __('PayPal', 'prm'),
@@ -248,7 +282,7 @@ function prm_donation_form_submit_email_message($values) {
 		'boleto' => __('Boleto', 'prm'),
 	);
 
-	$payment_method = isset($payment_methods[$values['payment-method']]) ? $payment_methods[$values['payment-method']] : '';
+	$payment_method = isset($payment_methods[$subscription->payment_method]) ? $payment_methods[$subscription->payment_method] : '';
 
 	ob_start();
 	include(PRM_PLUGIN_DIR . '/includes/prm.donation-form.message.html.php');
@@ -268,4 +302,14 @@ function prm_donation_form_submit_result($values) {
 	}
 
 	return $html;
+}
+
+function prm_donation_form_payment_complete($id) {
+	global $wpdb;
+
+	return $wpdb->update(
+		prm_patrons_table_name(),
+		array('payment_status' => 'completed'),
+		array('id' => $id)
+	);
 }

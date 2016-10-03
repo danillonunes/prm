@@ -29,6 +29,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+// Define plugin version.
+define('PRM_VERSION', '0.1');
+
 // Define plugin filename.
 define('PRM_PLUGIN_FILE', __FILE__);
 
@@ -43,6 +46,9 @@ require_once(PRM_PLUGIN_DIR . '/includes/prm.assets.php');
 
 // Include donation form file.
 require_once(PRM_PLUGIN_DIR . '/includes/prm.donation-form.php');
+
+// Include install file.
+require_once(PRM_PLUGIN_DIR . '/includes/prm.install.php');
 
 // Include options file.
 require_once(PRM_PLUGIN_DIR . '/includes/prm.options.php');
