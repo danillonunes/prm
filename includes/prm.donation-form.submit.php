@@ -288,7 +288,7 @@ function prm_donation_form_submit_email_message($subscription) {
 		case 'pagseguro':
 			$payment_details = __('Note que o pagamento via PagSeguro pode não ter sido aprovado imediatamente e a assinatura pode ser cancelada antes de sua aprovação.');
 			$payment_details .= '<br>';
-			$payment_details .= __('Verifique o status do pagamento diretament na interface do PagSeguro.');
+			$payment_details .= __('Verifique o status do pagamento diretamente na interface do PagSeguro.');
 			break;
 	}
 
