@@ -71,7 +71,7 @@ function prm_subscription_notification() {
 				}
 				break;
 			case 'pagseguro':
-				return wp_mail('marcus@danillo.net', 'PayPal IPN Log', var_export($_POST, true));
+				prm_donation_form_submit_email($_GET['prm_subscription_patron_id']);
 				exit;
 		}
 	}

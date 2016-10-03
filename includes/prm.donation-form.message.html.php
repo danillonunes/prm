@@ -40,7 +40,10 @@
 <br>
 
 <?php _e('Forma de pagamento', 'prm'); ?>: <?php echo $payment_method; ?>
-
+<?php if (isset($payment_details)): ?>
+	<br>
+	<?php echo $payment_details; ?>
+<?php endif; ?>
 <br>
 <br>
 

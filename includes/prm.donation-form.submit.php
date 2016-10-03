@@ -211,11 +211,6 @@ function prm_donation_form_submit_payment_pagseguro($id, $values) {
 
 	$pre_params['redirectURL'] = $return_url;
 
-	$site_url = site_url();
-	$site_url = (strpos('?', $site_url) === FALSE ? $site_url . '?' : $site_url . '&') . 'prm_subscription_return=pagseguro&prm_subscription_id=' . $id;
-
-	$pre_params['notificationURL'] = $site_url;
-
 	$args = array(
 		'method' => 'POST',
 		'headers' => array(
@@ -286,6 +281,14 @@ function prm_donation_form_submit_email_message($subscription) {
 		'deposito' => __('Depósito', 'prm'),
 		'boleto' => __('Boleto', 'prm'),
 	);
+
+	switch ($subscription->payment_method) {
+		case 'pagseguro':
+			$payment_details = __('Note que o pagamento via PagSeguro pode não ter sido aprovado imediatamente e a assinatura pode ser cancelada antes de sua aprovação.');
+			$payment_details .= '<br>';
+			$payment_details .= __('Verifique o status do pagamento diretament na interface do PagSeguro.');
+			break;
+	}
 
 	$payment_method = isset($payment_methods[$subscription->payment_method]) ? $payment_methods[$subscription->payment_method] : '';
 
