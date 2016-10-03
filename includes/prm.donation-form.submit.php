@@ -145,7 +145,7 @@ function prm_donation_form_submit_payment_paypal($id, $values) {
 	$params['charset'] = 'UTF-8';
 
 	$site_url = site_url();
-	$site_url = (strpos('?', $site_url) === FALSE ? $site_url . '?' : $site_url . '&') . 'prm_subscription_return=paypal&prm_subscription_patron_id=' . $id;
+	$site_url = (strpos('?', $site_url) === FALSE ? $site_url . '?' : $site_url . '&') . 'prm_subscription_return=paypal&prm_subscription_id=' . $id;
 	$params['notify_url'] = $site_url;
 
 	$params['first_name'] = $values['first-name'];
@@ -210,6 +210,11 @@ function prm_donation_form_submit_payment_pagseguro($id, $values) {
 	$return_url = $return_url . 'prm-donation-payment-method=pagseguro';
 
 	$pre_params['redirectURL'] = $return_url;
+
+	$site_url = site_url();
+	$site_url = (strpos('?', $site_url) === FALSE ? $site_url . '?' : $site_url . '&') . 'prm_subscription_return=pagseguro&prm_subscription_id=' . $id;
+
+	$pre_params['notificationURL'] = $site_url;
 
 	$args = array(
 		'method' => 'POST',
@@ -304,7 +309,7 @@ function prm_donation_form_submit_result($values) {
 	return $html;
 }
 
-function prm_donation_form_payment_complete($id) {
+function prm_donation_form_payment_complete($id, $details = array()) {
 	global $wpdb;
 
 	return $wpdb->update(
