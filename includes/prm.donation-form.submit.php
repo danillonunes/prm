@@ -56,7 +56,7 @@ function prm_donation_form_values($post) {
 			'postal-code' => $post['prm-donation-form-address-postal-code'],
 		),
 		'payment-method' => $post['prm-donation-form-payment-method'],
-		'subscription-amount' => $post['prm-donation-form-subscription-amount'] ? preg_replace('/,/', '.', preg_replace('/./', '', $post['prm-donation-form-subscription-amount'])) : prm_get_option('prm_subscription_amount'),
+		'subscription-amount' => $post['prm-donation-form-subscription-amount'] ? preg_replace('/,/', '.', preg_replace('/\./', '', $post['prm-donation-form-subscription-amount'])) : prm_get_option('prm_subscription_amount'),
 	);
 
 	$name = explode(' ', $values['name']);
