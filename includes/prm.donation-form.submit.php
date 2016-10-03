@@ -207,7 +207,7 @@ function prm_donation_form_submit_payment_pagseguro($id, $values) {
 
 	$return_url = prm_get_option('prm_subscription_return_url');
 	$return_url = strpos('?', $return_url) === FALSE ? $return_url . '?' : $return_url . '&';
-	$return_url = $return_url . 'prm-donation-payment-method=pagseguro';
+	$return_url = $return_url . 'prm-donation-payment-method=pagseguro&prm_subscription_return=pagseguro&prm_subscription_id=' . $id;
 
 	$pre_params['redirectURL'] = $return_url;
 
