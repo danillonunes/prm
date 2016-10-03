@@ -27,7 +27,7 @@
 		<div class="prm-donation-form-address">
 			<h4><?php _e('Endereço', 'prm'); ?></h4>
 			<?php if ($address_description = prm_get_option('prm_subscription_address_description')): ?>
-				<p class="description"><?php echo $address_description; ?></p>
+				<div class="description"><?php echo $address_description; ?></div>
 			<?php endif; ?>
 			<div class="prm-donation-form-element prm-donation-form-address-postal-code">
 				<label for="prm-donation-form-address-postal-code">
@@ -108,40 +108,43 @@
 			</div>
 		</div>
 
-		<div class="prm-donation-form-element prm-donation-form-payment-method">
-			<?php _e('Forma de pagamento', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
-			<div class="prm-donation-form-payment-method-paypal">
-				<label>
-					<input type="radio" name="prm-donation-form-payment-method" value="paypal" id="prm-donation-form-payment-method-paypal" <?php if ('paypal' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
-					<?php _e('PayPal', 'prm'); ?>
-				</label>
+		<div class="prm-donation-form-payment">
+			<h4><?php _e('Pagamento', 'prm'); ?></h4>
+			<div class="prm-donation-form-element prm-donation-form-payment-method">
+				<?php _e('Forma de pagamento', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
+				<div class="prm-donation-form-payment-method-paypal">
+					<label>
+						<input type="radio" name="prm-donation-form-payment-method" value="paypal" id="prm-donation-form-payment-method-paypal" <?php if ('paypal' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
+						<?php _e('PayPal', 'prm'); ?>
+					</label>
+				</div>
+
+				<div class="prm-donation-form-payment-method-pagseguro">
+					<label>
+						<input type="radio" name="prm-donation-form-payment-method" value="pagseguro" id="prm-donation-form-payment-method-pagseguro" <?php if ('pagseguro' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
+						<?php _e('PagSeguro', 'prm'); ?>
+					</label>
+				</div>
+
+				<div class="prm-donation-form-payment-method-boleto">
+					<label>
+						<input type="radio" name="prm-donation-form-payment-method" value="boleto" id="prm-donation-form-payment-method-boleto" <?php if ('boleto' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
+						<?php _e('Boleto', 'prm'); ?>
+					</label>
+				</div>
+
+				<div class="prm-donation-form-payment-method-deposito">
+					<label>
+						<input type="radio" name="prm-donation-form-payment-method" value="deposito" id="prm-donation-form-payment-method-deposito" <?php if ('deposito' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
+						<?php _e('Depósito', 'prm'); ?>
+					</label>
+				</div>
 			</div>
 
-			<div class="prm-donation-form-payment-method-pagseguro">
-				<label>
-					<input type="radio" name="prm-donation-form-payment-method" value="pagseguro" id="prm-donation-form-payment-method-pagseguro" <?php if ('pagseguro' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
-					<?php _e('PagSeguro', 'prm'); ?>
-				</label>
+			<div class="prm-donation-form-element prm-donation-form-subscription-amount">
+				<label for="prm-donation-form-subscription-amount"><?php _e('Valor (mensal)', 'prm'); ?></label>
+				<span><?php _e('R$', 'prm'); ?></span> <input type="text" name="prm-donation-form-subscription-amount" id="prm-donation-form-subscription-amount" value="<?php echo $_POST['prm-donation-form-subscription-amount']; ?>" placeholder="<?php echo get_option('prm_subscription_amount'); ?>">
 			</div>
-
-			<div class="prm-donation-form-payment-method-boleto">
-				<label>
-					<input type="radio" name="prm-donation-form-payment-method" value="boleto" id="prm-donation-form-payment-method-boleto" <?php if ('boleto' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
-					<?php _e('Boleto', 'prm'); ?>
-				</label>
-			</div>
-
-			<div class="prm-donation-form-payment-method-deposito">
-				<label>
-					<input type="radio" name="prm-donation-form-payment-method" value="deposito" id="prm-donation-form-payment-method-deposito" <?php if ('deposito' == $_POST['prm-donation-form-payment-method']) { echo 'checked="checked"'; } ?>>
-					<?php _e('Depósito', 'prm'); ?>
-				</label>
-			</div>
-		</div>
-
-		<div class="prm-donation-form-element prm-donation-form-subscription-amount">
-			<label for="prm-donation-form-subscription-amount"><?php _e('Valor (mensal)', 'prm'); ?></label>
-			<span><?php _e('R$', 'prm'); ?></span> <input type="text" name="prm-donation-form-subscription-amount" id="prm-donation-form-subscription-amount" value="<?php echo $_POST['prm-donation-form-subscription-amount']; ?>" placeholder="<?php echo get_option('prm_subscription_amount'); ?>">
 		</div>
 
 		<div class="prm-donation-form-element prm-donation-form-buttons">

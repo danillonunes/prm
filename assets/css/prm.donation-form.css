@@ -1,3 +1,7 @@
+.prm-donation-form h4,
+.prm-donation-form h4:first-child {
+	margin: 1em 0 0;
+}
 .prm-donation-form-error {
 	background-color: #f2dede;
 	border-color: #ebccd1;
@@ -35,8 +39,14 @@
 .prm-donation-form-phone {
 	width: 30%;
 }
+.prm-donation-form-address {
+	padding-top: 1em;
+}
+.prm-donation-form-address p {
+	margin: 0;
+}
 .prm-donation-form-address,
-.prm-donation-form-payment-method {
+.prm-donation-form-payment {
 	clear: left;
 }
 .prm-donation-form-address .prm-donation-form-element {
@@ -82,6 +92,9 @@
 }
 .prm-donation-form-address-administrative-area select {
 	display: block;
+}
+.prm-donation-form-payment {
+	padding-top: 1em;
 }
 .prm-donation-form-subscription-amount {
 	width: 25%;
