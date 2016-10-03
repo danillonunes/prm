@@ -71,6 +71,7 @@ function prm_subscription_notification() {
 				}
 				break;
 			case 'pagseguro':
+				include_once(PRM_PLUGIN_DIR . '/includes/prm.donation-form.submit.php');
 				prm_donation_form_submit_email($_GET['prm_subscription_patron_id']);
 				exit;
 		}
