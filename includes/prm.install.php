@@ -24,8 +24,10 @@ function prm_activate() {
 		address_locality text NOT NULL,
 		address_administrative_area text NOT NULL,
 		payment_method tinytext NOT NULL,
-		payment_status tinytext NOT NULL,
 		subscription_amount tinytext NOT NULL,
+		payment_status tinytext NOT NULL,
+		payment_method_transaction_id tinytext NOT NULL,
+		payment_method_subscription_id tinytext NOT NULL,
 		PRIMARY KEY (id)
 	) $charset_collate;";
 

@@ -98,6 +98,8 @@ function prm_donation_form_submit_save($values) {
 		'payment_method' => $values['payment-method'],
 		'payment_status' => 'pending',
 		'subscription_amount' => $values['subscription-amount'],
+		'payment_method_transaction_id' => 'pending',
+		'payment_method_subscription_id' => 'pending',
 	);
 
 	$insert = $wpdb->insert(
@@ -315,9 +317,11 @@ function prm_donation_form_submit_result($values) {
 function prm_donation_form_payment_complete($id, $details = array()) {
 	global $wpdb;
 
+	$data = array_merge(array('payment_status' => 'completed'), $details);
+
 	return $wpdb->update(
 		prm_patrons_table_name(),
-		array('payment_status' => 'completed'),
+		$data,
 		array('id' => $id)
 	);
 }

@@ -62,8 +62,8 @@ function prm_subscription_notification() {
 
 					if ($verification['body'] == 'VERIFIED') {
 						include_once(PRM_PLUGIN_DIR . '/includes/prm.donation-form.submit.php');
-						prm_donation_form_submit_email($_GET['prm_subscription_patron_id']);
-						prm_donation_form_payment_complete($_GET['prm_subscription_patron_id'], array(
+						prm_donation_form_submit_email($_GET['prm_subscription_id']);
+						prm_donation_form_payment_complete($_GET['prm_subscription_id'], array(
 							'payment_method_subscription_id' => $post['subscr_id'],
 							'payment_method_transaction_id' => $post['txn_id']
 						));
@@ -72,8 +72,8 @@ function prm_subscription_notification() {
 				break;
 			case 'pagseguro':
 				include_once(PRM_PLUGIN_DIR . '/includes/prm.donation-form.submit.php');
-				prm_donation_form_submit_email($_GET['prm_subscription_patron_id']);
-				exit;
+				prm_donation_form_submit_email($_GET['prm_subscription_id']);
+				break;
 		}
 	}
 }
