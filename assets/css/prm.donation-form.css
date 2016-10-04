@@ -97,7 +97,9 @@
 	width: 30%;
 }
 .prm-donation-form-address-administrative-area select {
+	border: 1px solid #e3e3e3;
 	display: block;
+	padding: 8px 0;
 	width: 100%;
 }
 .prm-donation-form-payment {
