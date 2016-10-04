@@ -6,7 +6,7 @@
 			<div class="prm-donation-form-error"><?php _e('Verifique os valores preenchidos e tente novamente.', 'prm'); ?></div>
 		<?php endif; ?>
 
-		<div class="prm-donation-form-personal">
+		<div class="prm-donation-form-section prm-donation-form-personal">
 			<h4><?php _e('Dados pessoais', 'prm'); ?></h4>
 			<div class="prm-donation-form-element prm-donation-form-name">
 				<label for="prm-donation-form-name"><?php _e('Nome', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span></label>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-		<div class="prm-donation-form-address">
+		<div class="prm-donation-form-section prm-donation-form-address">
 			<h4><?php _e('Endereço', 'prm'); ?></h4>
 			<?php if ($address_description = prm_get_option('prm_subscription_address_description')): ?>
 				<div class="description"><?php echo $address_description; ?></div>
@@ -108,7 +108,7 @@
 			</div>
 		</div>
 
-		<div class="prm-donation-form-payment">
+		<div class="prm-donation-form-section prm-donation-form-payment">
 			<h4><?php _e('Pagamento', 'prm'); ?></h4>
 			<div class="prm-donation-form-element prm-donation-form-payment-method">
 				<?php _e('Forma de pagamento', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
