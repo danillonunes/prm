@@ -3,7 +3,11 @@
 	margin: 1em 5px 0;
 }
 .prm-donation-form .description {
+	color: rgba(0, 0, 0, 0.5);
 	margin: 0 5px;
+}
+.prm-donation-form-element .description {
+	margin: 0;
 }
 .prm-donation-form-error {
 	background-color: #f2dede;
@@ -105,7 +109,7 @@
 .prm-donation-form-payment {
 	padding-top: 1em;
 }
-.prm-donation-form-subscription-amount {
+.prm-donation-form-subscription-amount input {
 	width: 25%;
 }
 .prm-donation-form-subscription-amount span,

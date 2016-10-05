@@ -58,11 +58,11 @@
 </tr>
 
 <tr>
-<th scope="row"><label for="prm-subscription-payment-description"><?php _e('Descrição do pagamento', 'prm'); ?></label></th>
+<th scope="row"><label for="prm-subscription-payment-amount-description"><?php _e('Descrição do valor de pagamento', 'prm'); ?></label></th>
 <td>
-	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_payment_description" id="prm-subscription-payment-description"><?php echo get_option('prm_subscription_payment_description'); ?></textarea>
+	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_payment_amount_description" id="prm-subscription-payment-amount-description"><?php echo get_option('prm_subscription_payment_amount_description'); ?></textarea>
 	<p class="description">
-		<?php _e('Mensagem de ajuda que será exibida na seção <b>pagamento</b> na página de inscrição.', 'prm'); ?>
+		<?php _e('Mensagem de ajuda que será exibida no campo <b>valor</b> na página de inscrição.', 'prm'); ?>
 		<br>
 		<?php _e('Você pode usar código HTML.', 'prm'); ?>
 	</p>
