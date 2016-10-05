@@ -77,6 +77,16 @@ function prm_donation_form_values($post) {
 
 	$values['postal-int'] = preg_replace('/[^\d]/', '', $values['address']['postal-code']);
 
+	switch ($values['payment-method']) {
+		case 'boleto':
+		case 'deposito':
+			$values['subscription-frequency'] = $post['prm-donation-form-subscription-' . $values['payment-method'] . '-frequency'];
+			$values['subscription-amount'] = prm_get_option('prm_subscription_' . $values['payment-method'] . '_' . preg_replace('/-/', '_', $values['subscription-frequency']) . '_amount');
+			break;
+		default:
+			$values['subscription-frequency'] = 'month-1';
+	}
+
 	return $values;
 }
 
@@ -98,6 +108,7 @@ function prm_donation_form_submit_save($values) {
 		'payment_method' => $values['payment-method'],
 		'payment_status' => 'pending',
 		'subscription_amount' => $values['subscription-amount'],
+		'subscription_frequency' => $values['subscription-frequency'],
 		'payment_method_transaction_id' => 'pending',
 		'payment_method_subscription_id' => 'pending',
 	);
@@ -276,6 +287,18 @@ function prm_donation_form_submit_email_message($subscription) {
 	$postal_code = $subscription->address_postal_code;
 
 	$subscription_amount = preg_replace('/\./', ',', $subscription->subscription_amount);
+
+	switch ($subscription->subscription_frequency) {
+		case 'month-3':
+			$subscription_frequency = __('Trimestral', 'prm');
+			break;
+		case 'month-6':
+			$subscription_frequency = __('Semestral', 'prm');
+			break;
+		case 'month-12':
+			$subscription_frequency = __('Anual', 'prm');
+			break;
+	}
 
 	$payment_methods = array(
 		'paypal' => __('PayPal', 'prm'),

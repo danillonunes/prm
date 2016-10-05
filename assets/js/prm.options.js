@@ -1,7 +1,7 @@
 (function($) {
 
 $(function(){
-	var $amount = $('#prm-subscription-amount');
+	var $amount = $('.prm-amount');
 	var $sandbox = $('#prm-sandbox-mode');
 	var $sandboxPaypalEmail = $('#prm-paypal-sandbox-email');
 	var $sandboxPagseguroEmail = $('#prm-pagseguro-sandbox-email');

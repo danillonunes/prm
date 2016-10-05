@@ -23,6 +23,8 @@ $(function(){
 	var $thoroughfare = $('#prm-donation-form-address-thoroughfare');
 	var $premise = $('#prm-donation-form-address-premise');
 	var $amount = $('#prm-donation-form-subscription-amount');
+	var $frequencyBoleto = $('.prm-donation-form-subscription-boleto-frequency');
+	var $frequencyDeposito = $('.prm-donation-form-subscription-deposito-frequency');
 
 	$form
 		.on('submit', function(e) {
@@ -53,6 +55,14 @@ $(function(){
 
 	$amount.mask('#.##0,00', {reverse: true});
 
+	if (!$frequencyBoleto.find('input:checked').length) {
+		$frequencyBoleto.find('input:first').trigger('click');
+	}
+
+	if (!$frequencyDeposito.find('input:checked').length) {
+		$frequencyDeposito.find('input:first').trigger('click');
+	}
+
 	$paymentMethods
 		.on('change', function() {
 			$paymentMethods
@@ -62,9 +72,24 @@ $(function(){
 
 			if ($paymentMethods.filter('#prm-donation-form-payment-method-paypal:checked,#prm-donation-form-payment-method-pagseguro:checked').length) {
 				$amount.parents('.prm-donation-form-element').show();
+				$amount.trigger('focus');
 			}
 			else {
 				$amount.parents('.prm-donation-form-element').hide();
+			}
+
+			if ($paymentMethods.filter('#prm-donation-form-payment-method-boleto:checked').length) {
+				$frequencyBoleto.show();
+			}
+			else {
+				$frequencyBoleto.hide();
+			}
+
+			if ($paymentMethods.filter('#prm-donation-form-payment-method-deposito:checked').length) {
+				$frequencyDeposito.show();
+			}
+			else {
+				$frequencyDeposito.hide();
 			}
 		})
 		.trigger('change');

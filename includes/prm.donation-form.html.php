@@ -110,6 +110,9 @@
 
 		<div class="prm-donation-form-section prm-donation-form-payment">
 			<h4><?php _e('Pagamento', 'prm'); ?></h4>
+			<?php if ($payment_description = prm_get_option('prm_subscription_payment_description')): ?>
+				<div class="description"><?php echo $payment_description; ?></div>
+			<?php endif; ?>
 			<div class="prm-donation-form-element prm-donation-form-payment-method">
 				<?php _e('Forma de pagamento', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
 				<div class="prm-donation-form-payment-method-paypal">
@@ -144,6 +147,54 @@
 			<div class="prm-donation-form-element prm-donation-form-subscription-amount">
 				<label for="prm-donation-form-subscription-amount"><?php _e('Valor (mensal)', 'prm'); ?></label>
 				<span><?php _e('R$', 'prm'); ?></span> <input type="text" name="prm-donation-form-subscription-amount" id="prm-donation-form-subscription-amount" value="<?php echo $_POST['prm-donation-form-subscription-amount']; ?>" placeholder="<?php echo get_option('prm_subscription_amount'); ?>">
+			</div>
+
+			<div class="prm-donation-form-element prm-donation-form-subscription-boleto-frequency">
+				<?php _e('Valor para Boleto', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
+				<div class="prm-donation-form-subscription-boleto-frequency-month-3">
+					<label>
+						<input type="radio" name="prm-donation-form-subscription-boleto-frequency" value="month-3" id="prm-donation-form-subscription-boleto-frequency-month-3" <?php if ('month-3' == $_POST['prm-donation-form-subscription-boleto-frequency-month-3']) { echo 'checked="checked"'; } ?>>
+						<?php echo sprintf(__('R$ %s (Trimestral)', 'prm'), prm_get_option('prm_subscription_boleto_month_3_amount')); ?>
+					</label>
+				</div>
+
+				<div class="prm-donation-form-subscription-boleto-frequency-month-6">
+					<label>
+						<input type="radio" name="prm-donation-form-subscription-boleto-frequency" value="month-6" id="prm-donation-form-subscription-boleto-frequency-month-6" <?php if ('month-6' == $_POST['prm-donation-form-subscription-boleto-frequency-month-6']) { echo 'checked="checked"'; } ?>>
+						<?php echo sprintf(__('R$ %s (Semestral)', 'prm'), prm_get_option('prm_subscription_boleto_month_6_amount')); ?>
+					</label>
+				</div>
+
+				<div class="prm-donation-form-subscription-boleto-frequency-month-12">
+					<label>
+						<input type="radio" name="prm-donation-form-subscription-boleto-frequency" value="month-12" id="prm-donation-form-subscription-boleto-frequency-month-12" <?php if ('month-12' == $_POST['prm-donation-form-subscription-boleto-frequency-month-12']) { echo 'checked="checked"'; } ?>>
+						<?php echo sprintf(__('R$ %s (Anual)', 'prm'), prm_get_option('prm_subscription_boleto_month_12_amount')); ?>
+					</label>
+				</div>
+			</div>
+
+			<div class="prm-donation-form-element prm-donation-form-subscription-deposito-frequency">
+				<?php _e('Valor para Depósito', 'prm'); ?> <span class="required" title="<?php _e('Obrigatório', 'prm'); ?>">*</span>
+				<div class="prm-donation-form-subscription-deposito-frequency-month-3">
+					<label>
+						<input type="radio" name="prm-donation-form-subscription-deposito-frequency" value="month-3" id="prm-donation-form-subscription-deposito-frequency-month-3" <?php if ('month-3' == $_POST['prm-donation-form-subscription-deposito-frequency-month-3']) { echo 'checked="checked"'; } ?>>
+						<?php echo sprintf(__('R$ %s (Trimestral)', 'prm'), prm_get_option('prm_subscription_deposito_month_3_amount')); ?>
+					</label>
+				</div>
+
+				<div class="prm-donation-form-subscription-deposito-frequency-month-6">
+					<label>
+						<input type="radio" name="prm-donation-form-subscription-deposito-frequency" value="month-6" id="prm-donation-form-subscription-deposito-frequency-month-6" <?php if ('month-6' == $_POST['prm-donation-form-subscription-deposito-frequency-month-6']) { echo 'checked="checked"'; } ?>>
+						<?php echo sprintf(__('R$ %s (Semestral)', 'prm'), prm_get_option('prm_subscription_deposito_month_6_amount')); ?>
+					</label>
+				</div>
+
+				<div class="prm-donation-form-subscription-deposito-frequency-month-12">
+					<label>
+						<input type="radio" name="prm-donation-form-subscription-deposito-frequency" value="month-12" id="prm-donation-form-subscription-deposito-frequency-month-12" <?php if ('month-12' == $_POST['prm-donation-form-subscription-deposito-frequency-month-12']) { echo 'checked="checked"'; } ?>>
+						<?php echo sprintf(__('R$ %s (Anual)', 'prm'), prm_get_option('prm_subscription_deposito_month_12_amount')); ?>
+					</label>
+				</div>
 			</div>
 		</div>
 

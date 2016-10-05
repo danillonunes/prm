@@ -39,12 +39,16 @@
 <br>
 <br>
 
-<?php _e('Forma de pagamento', 'prm'); ?>: <?php echo $payment_method; ?>
+<strong><?php _e('Forma de pagamento', 'prm'); ?>:</strong> <?php echo $payment_method; ?>
 <?php if (isset($payment_details)): ?>
 	<br>
 	<?php echo $payment_details; ?>
 <?php endif; ?>
-<br>
+
+<?php if (isset($subscription_frequency)): ?>
+	<br>
+	<strong><?php _e('Frequência', 'prm'); ?>:</strong> <?php echo $subscription_frequency; ?>
+<?php endif; ?>
 <br>
 
-<?php _e('Valor', 'prm'); ?>: R$ <?php echo $subscription_amount; ?>
+<strong><?php _e('Valor', 'prm'); ?>:</strong> R$ <?php echo $subscription_amount; ?>

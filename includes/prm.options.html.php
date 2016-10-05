@@ -28,7 +28,7 @@
 <tr>
 <th scope="row"><label for="prm-subscription-amount"><?php _e('Valor', 'prm'); ?></label></th>
 <td>
-	<input type="text" class="regular-text" name="prm_subscription_amount" id="prm-subscription-amount" value="<?php echo get_option('prm_subscription_amount'); ?>" />
+	<input type="text" class="regular-text prm-amount" name="prm_subscription_amount" id="prm-subscription-amount" value="<?php echo get_option('prm_subscription_amount'); ?>" />
   <p class="description"><?php _e('O valor mensal da inscrição, em reais.', 'prm'); ?></p>
 </td>
 </tr>
@@ -50,7 +50,19 @@
 <td>
 	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_address_description" id="prm-subscription-address-description"><?php echo get_option('prm_subscription_address_description'); ?></textarea>
 	<p class="description">
-		<?php _e('Mensagem de ajuda que será exibida no campo <b>endereço</b> na página de inscrição.', 'prm'); ?>
+		<?php _e('Mensagem de ajuda que será exibida na seção <b>endereço</b> na página de inscrição.', 'prm'); ?>
+		<br>
+		<?php _e('Você pode usar código HTML.', 'prm'); ?>
+	</p>
+</td>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-payment-description"><?php _e('Descrição do pagamento', 'prm'); ?></label></th>
+<td>
+	<textarea class="large-text code" rows="5" cols="50" name="prm_subscription_payment_description" id="prm-subscription-payment-description"><?php echo get_option('prm_subscription_payment_description'); ?></textarea>
+	<p class="description">
+		<?php _e('Mensagem de ajuda que será exibida na seção <b>pagamento</b> na página de inscrição.', 'prm'); ?>
 		<br>
 		<?php _e('Você pode usar código HTML.', 'prm'); ?>
 	</p>
@@ -139,6 +151,66 @@
 		<br>
 		<?php echo sprintf(__('<a href="%s" target="_blank">Acesse essa página para obter o token de teste</a>.', 'prm'), 'https://sandbox.pagseguro.uol.com.br/vendedor/configuracoes.html'); ?>
 	</p>
+</td>
+</tr>
+
+<tr>
+<th scope="row" colspan="2">
+	<h3><?php _e('Configurações do Boleto', 'prm'); ?></h3>
+</th>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-boleto-month-3-amount"><?php _e('Valor trimestral', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text prm-amount" name="prm_subscription_boleto_month_3_amount" id="prm-subscription-boleto-month-3-amount" value="<?php echo get_option('prm_subscription_boleto_month_3_amount'); ?>" />
+  <p class="description"><?php _e('O valor da inscrição via boleto trimestral, em reais.', 'prm'); ?></p>
+</td>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-boleto-month-6-amount"><?php _e('Valor semestral', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text prm-amount" name="prm_subscription_boleto_month_6_amount" id="prm-subscription-boleto-month-6-amount" value="<?php echo get_option('prm_subscription_boleto_month_6_amount'); ?>" />
+  <p class="description"><?php _e('O valor da inscrição via boleto semestral, em reais.', 'prm'); ?></p>
+</td>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-boleto-month-12-amount"><?php _e('Valor anual', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text prm-amount" name="prm_subscription_boleto_month_12_amount" id="prm-subscription-boleto-month-12-amount" value="<?php echo get_option('prm_subscription_boleto_month_12_amount'); ?>" />
+  <p class="description"><?php _e('O valor da inscrição via boleto anual, em reais.', 'prm'); ?></p>
+</td>
+</tr>
+
+<tr>
+<th scope="row" colspan="2">
+	<h3><?php _e('Configurações do Depósito', 'prm'); ?></h3>
+</th>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-deposito-month-3-amount"><?php _e('Valor trimestral', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text prm-amount" name="prm_subscription_deposito_month_3_amount" id="prm-subscription-deposito-month-3-amount" value="<?php echo get_option('prm_subscription_deposito_month_3_amount'); ?>" />
+  <p class="description"><?php _e('O valor da inscrição via depósito trimestral, em reais.', 'prm'); ?></p>
+</td>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-deposito-month-6-amount"><?php _e('Valor semestral', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text prm-amount" name="prm_subscription_deposito_month_6_amount" id="prm-subscription-deposito-month-6-amount" value="<?php echo get_option('prm_subscription_deposito_month_6_amount'); ?>" />
+  <p class="description"><?php _e('O valor da inscrição via depósito semestral, em reais.', 'prm'); ?></p>
+</td>
+</tr>
+
+<tr>
+<th scope="row"><label for="prm-subscription-deposito-month-12-amount"><?php _e('Valor anual', 'prm'); ?></label></th>
+<td>
+	<input type="text" class="regular-text prm-amount" name="prm_subscription_deposito_month_12_amount" id="prm-subscription-deposito-month-12-amount" value="<?php echo get_option('prm_subscription_deposito_month_12_amount'); ?>" />
+  <p class="description"><?php _e('O valor da inscrição via depósito anual, em reais.', 'prm'); ?></p>
 </td>
 </tr>
 

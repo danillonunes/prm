@@ -8,6 +8,7 @@ function prm_options_admin_init() {
 	register_setting('prm', 'prm_subscription_amount');
 	register_setting('prm', 'prm_subscription_item_name');
 	register_setting('prm', 'prm_subscription_address_description');
+	register_setting('prm', 'prm_subscription_payment_description');
 	register_setting('prm', 'prm_sandbox_mode');
 	register_setting('prm', 'prm_paypal_email');
 	register_setting('prm', 'prm_paypal_sandbox_email');
@@ -15,6 +16,12 @@ function prm_options_admin_init() {
 	register_setting('prm', 'prm_pagseguro_token');
 	register_setting('prm', 'prm_pagseguro_sandbox_email');
 	register_setting('prm', 'prm_pagseguro_sandbox_token');
+	register_setting('prm', 'prm_subscription_boleto_month_3_amount');
+	register_setting('prm', 'prm_subscription_boleto_month_6_amount');
+	register_setting('prm', 'prm_subscription_boleto_month_12_amount');
+	register_setting('prm', 'prm_subscription_deposito_month_3_amount');
+	register_setting('prm', 'prm_subscription_deposito_month_6_amount');
+	register_setting('prm', 'prm_subscription_deposito_month_12_amount');
 	register_setting('prm', 'prm_subscription_return_url');
 	register_setting('prm', 'prm_subscription_paypal_message');
 	register_setting('prm', 'prm_subscription_pagseguro_message');

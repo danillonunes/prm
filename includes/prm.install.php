@@ -25,6 +25,7 @@ function prm_activate() {
 		address_administrative_area text NOT NULL,
 		payment_method tinytext NOT NULL,
 		subscription_amount tinytext NOT NULL,
+		subscription_frequency tinytext NOT NULL,
 		payment_status tinytext NOT NULL,
 		payment_method_transaction_id tinytext NOT NULL,
 		payment_method_subscription_id tinytext NOT NULL,
