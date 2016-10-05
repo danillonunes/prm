@@ -143,10 +143,10 @@
 
 			<div class="prm-donation-form-element prm-donation-form-subscription-amount">
 				<label for="prm-donation-form-subscription-amount"><?php _e('Valor (mensal)', 'prm'); ?></label>
+				<span><?php _e('R$', 'prm'); ?></span> <input type="text" name="prm-donation-form-subscription-amount" id="prm-donation-form-subscription-amount" value="<?php echo $_POST['prm-donation-form-subscription-amount']; ?>" placeholder="<?php echo get_option('prm_subscription_amount'); ?>">
 				<?php if ($payment_amount_description = prm_get_option('prm_subscription_payment_amount_description')): ?>
 					<div class="description"><?php echo $payment_amount_description; ?></div>
 				<?php endif; ?>
-				<span><?php _e('R$', 'prm'); ?></span> <input type="text" name="prm-donation-form-subscription-amount" id="prm-donation-form-subscription-amount" value="<?php echo $_POST['prm-donation-form-subscription-amount']; ?>" placeholder="<?php echo get_option('prm_subscription_amount'); ?>">
 			</div>
 
 			<div class="prm-donation-form-element prm-donation-form-subscription-boleto-frequency">
