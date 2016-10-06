@@ -6,7 +6,7 @@
 Plugin Name: PRM
 Plugin URI: https://wordpress.org/plugins/orghunter
 Description: PRM: The Patrão Relationship Management!
-Version: 0.2
+Version: 1.0
 Author: Danillo Nunes
 Author URI: http://danillonunes.com
 License: GPLv2 or later
@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 // Define plugin version.
-define('PRM_VERSION', '0.2');
+define('PRM_VERSION', '1.0');
 
 // Define plugin filename.
 define('PRM_PLUGIN_FILE', __FILE__);
