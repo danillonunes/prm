@@ -3,6 +3,13 @@
 function prm_donation_form_validate($post) {
 	$error = array();
 
+	if (!wp_verify_nonce($post['prm-donation-form-nonce'], 'prm-donation-form')) {
+		$error[] = array(
+			'error' => 'invalid',
+			'field' => 'prm-donation-form-nonce'
+		);
+	}
+
 	foreach ($post as $key => $value) {
 		switch ($key) {
 			case 'prm-donation-form-name':

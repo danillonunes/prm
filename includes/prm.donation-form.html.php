@@ -2,6 +2,8 @@
 <div class="prm-donation-form">
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="prm-donation-form">
 
+		<?php wp_nonce_field('prm-donation-form', 'prm-donation-form-nonce'); ?>
+
 		<?php if ($prm_donation_form_error = prm_donation_form_error()): ?>
 			<div class="prm-donation-form-error"><?php _e('Verifique os valores preenchidos e tente novamente.', 'prm'); ?></div>
 		<?php endif; ?>
